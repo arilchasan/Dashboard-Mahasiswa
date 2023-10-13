@@ -5,6 +5,8 @@ use App\Http\Controllers\DosenController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\MataKuliahController;
+use App\Http\Controllers\OrderController;
+use App\Models\Order;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,10 +40,18 @@ Route::prefix('/admin')->group(function () {
     Route::get('/dosen', [DosenController::class, 'index']);
     Route::get('/mata-kuliah',[MataKuliahController::class, 'index']);
     Route::get('/mata-kuliah/detail/{id}',[MataKuliahController::class, 'detail']);
+    Route::get('/mata-kuliah/permintaan',[MataKuliahController::class, 'permintaan']);
 
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::post('/login-load', [LoginController::class, 'login']);
     Route::get('/logout', [LoginController::class, 'logout']);
+    Route::get('/login-mahasiswa', [LoginController::class, 'indexMhs']);
+    Route::post('/login-mahasiswa-load', [LoginController::class, 'loginMhs']);
+    Route::get('/register', [LoginController::class, 'register']);
+    Route::post('/register-load', [LoginController::class, 'registerLoad']);
+    Route::post('/gabung-matkul', [OrderController::class, 'gabungMatkul']);
+    Route::post('/approve-matkul/{id}', [OrderController::class, 'approve']);
+    Route::post('/reject-matkul/{id}', [OrderController::class, 'reject']);
     Route::get('/error', function () {
         return view('admin.403');
     });

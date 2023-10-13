@@ -30,6 +30,12 @@
     </head>
     <div class="data-tambah">
         <h2 class="tittle">Mata Kuliah</h2>
+        @auth
+            @if (auth()->user()->role == 'dosen')
+                <a href="/admin/mata-kuliah/permintaan"
+                    class="px-5 py-3 text-xs font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Permintaan</a>
+            @endif
+        @endauth
 
     </div>
     @if (session()->has('success'))
@@ -39,6 +45,16 @@
             <span class="sr-only">Info</span>
             <div class="ml-3 text-sm font-medium">
                 {{ session('success') }}
+            </div>
+        </div>
+    @endif
+    @if (session()->has('error'))
+        <div id="alert-2" style="width: 150vh"
+            class="flex items-center p-4 mb-4 ml-5 text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+            role="alert">
+            <span class="sr-only">Info</span>
+            <div class="ml-3 text-sm font-medium">
+                {{ session('error') }}
             </div>
         </div>
     @endif
@@ -89,7 +105,6 @@
                                 class="px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Detail</a>
                         </td>
                     </tr>
-                   
                 @endforeach
             </tbody>
         </table>

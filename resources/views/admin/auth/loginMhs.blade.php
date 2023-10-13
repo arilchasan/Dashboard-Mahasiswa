@@ -9,18 +9,18 @@
     <div class="relative mx-auto w-full max-w-md bg-white px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 sm:rounded-xl sm:px-10">
         <div class="w-full">
             <div class="text-center">
-                <h1 class="text-3xl font-semibold text-gray-900">Login Dosen / Admin</h1>
+                <h1 class="text-3xl font-semibold text-gray-900">Login Mahasiswa</h1>
                 <p class="mt-2 text-gray-500">Login untuk melanjutkan</p>
             </div>
             <div class="mt-5">
-                <form action="/admin/login-load" method="POST">
+                <form action="/admin/login-mahasiswa-load" method="POST">
                     @csrf
                     <div class="relative mt-6">
                         <input type="text" name="name" id="name" placeholder="Username" class="peer pl-2 mt-1 w-full border-b-2 border-gray-300 px-0 py-1 placeholder:text-transparent focus:border-gray-500 focus:outline-none" autocomplete="NA" required/>
                         <label for="name" class="pb-3 pointer-events-none absolute top-0 left-0 origin-left -translate-y-1/2 transform text-sm text-gray-800 opacity-75 transition-all duration-100 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800">Username</label>
                     </div>
                     <div class="relative mt-6">
-                        <input type="password" name="password" id="password" placeholder="Password" class="peer pl-2 peer mt-1 w-full border-b-2 border-gray-300 px-0 py-1 placeholder:text-transparent focus:border-gray-500 focus:outline-none" required />
+                        <input type="password" name="password" id="password" placeholder="Password" class="peer pl-2 peer mt-1 w-full border-b-2 border-gray-300 px-0 py-1 placeholder:text-transparent focus:border-gray-500 focus:outline-none" required/>
                         <label for="password" class="pb-3 pointer-events-none absolute top-0 left-0 origin-left -translate-y-1/2 transform text-sm text-gray-800 opacity-75 transition-all duration-100 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800">Password</label>
                         <div class="absolute top-0 right-0 mt-2 mr-3">
                             <span id="password-toggle" class="cursor-pointer" onclick="togglePasswordVisibility()">
@@ -33,8 +33,13 @@
                     </div>
                 </form>
                 <div class="text-center py-2">
-                    <a href="/admin/login-mahasiswa" class="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-100">
-                        Login sebagai Mahasiswa
+                    <a href="/admin/login" class="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-100">
+                        Login sebagai Dosen / Admin
+                    </a>
+                </div>
+                <div class="text-center">
+                    <a href="/admin/register" class="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-gray-100">
+                        Daftar sebagai Mahasiswa
                     </a>
                 </div>
             </div>

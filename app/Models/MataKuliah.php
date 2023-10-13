@@ -32,4 +32,9 @@ class MataKuliah extends Model
     {
         return $this->hasMany(Mahasiswa::class , 'jurusans_id' , 'kode_jurusan');
     }
+
+    public function order()
+    {
+        return $this->hasMany(Order::class);
+    }
 }
