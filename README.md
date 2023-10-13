@@ -3,7 +3,7 @@
 
 **Admin Default Akun**
 
--   username: admin
+-   username: Admin
 -   password: admin123
 
 -   username: Dosen
