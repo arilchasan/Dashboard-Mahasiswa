@@ -17,7 +17,7 @@ class MataKuliahController extends Controller
     public function detail($id) {
         $matkul = MataKuliah::find($id);
         $jurusan = Mahasiswa::where('jurusans_id', $id)->get();
-        $idM = auth('mahasiswa')->user()->id;
+        $idM = Order::where('mahasiswa_id')->get();
         $matkul_id = MataKuliah::where('kode_mata_kuliah', $id)->get()->first();
         $mahasiswa = Mahasiswa::whereHas('orders', function ($query) use ($id) {
             $query->where('status', 'success');
