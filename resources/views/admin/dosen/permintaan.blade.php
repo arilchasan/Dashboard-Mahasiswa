@@ -60,7 +60,7 @@
                         Nama Mahasiswa
                     </th>
                     <th scope="col-md-4" class="px-6 py-3">
-                        Mata kuliah yang diambil
+                        Jurusan
                     </th>
                     <th scope="col-md-4" class="px-6 py-3">
                         Status
@@ -77,7 +77,7 @@
                             {{ $d->mahasiswa->name }}
                         </th>
                         <td class="px-6 py-4">
-                            {{ $d->matkul->nama_mata_kuliah }}
+                            {{ $d->mahasiswa->jurusan['jurusan'] }}
                         </td>
                         <td class="px-6 py-5 status">
                             @if ($d->status == 'pending')

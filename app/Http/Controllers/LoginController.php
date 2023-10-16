@@ -86,7 +86,7 @@ class LoginController extends Controller
                 return redirect('/admin/mata-kuliah')->with('success', 'Berhasil Login sebagai Mahasiswa');
             }
         } else {
-            return redirect()->back()->with('error', 'Login Gagal');
+            return redirect()->back()->with('error', 'Login Gagal, Email atau password salah');
         }
     }
 }

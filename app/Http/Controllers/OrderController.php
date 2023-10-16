@@ -12,13 +12,13 @@ class OrderController extends Controller
     {
         if (auth('mahasiswa')->user()->role == 'mahasiswa') {
             $request->validate([
-                'matkul_id' => 'required',
+                // 'matkul_id' => 'required',
                 'mahasiswa_id' => 'required',
             ]);
 
             $order = new Order([
-                'mahasiswa_id' => $request->mahasiswa_id,
-                'matkul_id' => $request->matkul_id,
+                'mahasiswa_id' => auth('mahasiswa')->user()->id,
+                // 'matkul_id' => $request->matkul_id,
                 'status' => 'pending',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),

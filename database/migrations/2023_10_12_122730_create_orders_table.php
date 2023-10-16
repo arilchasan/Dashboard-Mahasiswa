@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('order', function (Blueprint $table) {
             $table->id();
             $table->integer('mahasiswa_id');
-            $table->integer('matkul_id');
+            // $table->integer('matkul_id');
             $table->enum('status', ['pending', 'success', 'failed']);
             $table->timestamps();
         });

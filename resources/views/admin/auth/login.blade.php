@@ -7,6 +7,26 @@
 </head>
 <body class="min-h-screen flex justify-center items-center">
     <div class="relative mx-auto w-full max-w-md bg-white px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 sm:rounded-xl sm:px-10">
+        @if (session()->has('success'))
+        <div id="alert-3" 
+            class="flex items-center p-4 mb-4 ml-5 text-green-700 rounded-lg bg-green-50 dark:bg-gray-700 dark:text-green-400"
+            role="alert">
+            <span class="sr-only">Info</span>
+            <div class="ml-3 text-sm font-medium">
+                {{ session('success') }}
+            </div>
+        </div>
+    @endif
+    @if (session()->has('error'))
+        <div id="alert-2" 
+            class="flex items-center p-4 mb-4 ml-5 text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+            role="alert">
+            <span class="sr-only">Info</span>
+            <div class="ml-3 text-sm font-medium">
+                {{ session('error') }}
+            </div>
+        </div>
+    @endif
         <div class="w-full">
             <div class="text-center">
                 <h1 class="text-3xl font-semibold text-gray-900">Login Dosen / Admin</h1>
