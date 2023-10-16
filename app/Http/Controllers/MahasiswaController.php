@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Mahasiswa;
 use App\Models\MataKuliah;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class MahasiswaController extends Controller
@@ -27,6 +28,8 @@ class MahasiswaController extends Controller
             'phone' => 'required',
             'address' => 'required',
             'age' => 'required',
+            'jurusans_id' => 'required',
+            'password' => 'required'
         ]);
         if($rules->fails()){
             return redirect()->back()->with('errors', 'Data Mahasiswa Gagal Ditambahkan');
@@ -36,7 +39,9 @@ class MahasiswaController extends Controller
                 'gender' => $request->gender,
                 'phone' => $request->phone,
                 'address' => $request->address,
-                'age' => $request->age
+                'age' => $request->age,
+                'jurusans_id' => $request->jurusans_id,
+                'password' => Hash::make($request->password)
             ]);
             return redirect('/admin/mahasiswa/list')->with('success', 'Data Mahasiswa Berhasil Ditambahkan');
         }
