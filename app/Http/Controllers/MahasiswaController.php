@@ -41,7 +41,8 @@ class MahasiswaController extends Controller
                 'address' => $request->address,
                 'age' => $request->age,
                 'jurusans_id' => $request->jurusans_id,
-                'password' => Hash::make($request->password)
+                'password' => Hash::make($request->password),
+                'role' => 'mahasiswa'
             ]);
             return redirect('/admin/mahasiswa/list')->with('success', 'Data Mahasiswa Berhasil Ditambahkan');
         }
