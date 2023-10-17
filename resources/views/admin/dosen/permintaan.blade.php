@@ -114,6 +114,15 @@
                     </tr>
                 @endforeach
             </tbody>
+            <tbody>
+                @if ($order->isEmpty())
+                    <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                        <td colspan="4" class="px-6 py-4 text-center whitespace-nowrap dark:text-white">
+                            <span class="text-red-500">Tidak ada permintaan</span>
+                        </td>
+                    </tr>
+                @endif
+            </tbody>
         </table>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>

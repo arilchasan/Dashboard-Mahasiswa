@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('order', function (Blueprint $table) {
             $table->id();
-            $table->integer('mahasiswa_id');
+            $table->unsignedBigInteger('mahasiswa_id');
+            $table->foreign('mahasiswa_id')->references('id')->on('mahasiswa')->onDelete('cascade');
             // $table->integer('matkul_id');
             $table->enum('status', ['pending', 'success', 'failed']);
             $table->timestamps();

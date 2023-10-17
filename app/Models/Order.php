@@ -12,7 +12,6 @@ class Order extends Model
     protected $table = 'order';
     protected $fillable = [
         'mahasiswa_id',
-        'matkul_id',
         'status'
     ];
     protected $guarded = ['id'];

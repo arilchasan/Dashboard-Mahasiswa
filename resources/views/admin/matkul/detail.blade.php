@@ -136,7 +136,7 @@
 
             <a href="/admin/mata-kuliah"
                 class="px-5 py-3 text-xs font-medium text-center text-white bg-gray-700 rounded-lg hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Kembali</a>
-            @if (auth('mahasiswa')->user()->role == 'mahasiswa')
+            @if (auth('mahasiswa')->user()->role == 'mahasiswa' || auth()->user()->role == 'admin' )
                 <button type="submit"
                     class="px-5 py-3 text-xs font-medium text-center text-white bg-purple-700 rounded-lg hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800">Gabung
                     Mata Kuliah
