@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\Mahasiswa;
 use App\Models\MataKuliah;
 use Illuminate\Http\Request;
@@ -90,5 +91,13 @@ class MahasiswaController extends Controller
         $mahasiswa = Mahasiswa::find($id);
         $mahasiswa->delete();
         return redirect('/admin/mahasiswa/list')->with('success', 'Data Mahasiswa Berhasil Dihapus');
+    }
+
+    public function matkulSaya() {
+        $matakuliah = Order::where('mahasiswa_id', auth('mahasiswa')->user()->id)->get();
+        return view ('admin.mahasiswa.matkulmhs',
+        [
+            'matakuliah' => $matakuliah,
+        ]);
     }
 }

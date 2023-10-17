@@ -43,16 +43,16 @@
         </div>
     @endif
     <div class="mb-10" style="width:95%">
-        <form class="relative overflow-x-auto shadow-md sm:rounded-lg mb-4 p-4"  action="/admin/gabung-matkul"
-            method="POST" id="input-data" enctype="multipart/form-data">
+        <form class="relative overflow-x-auto shadow-md sm:rounded-lg mb-4 p-4" action="/admin/gabung-matkul" method="POST"
+            id="input-data" enctype="multipart/form-data">
             @csrf
-            <input type="text" id="mahasiswa_id" name="mahasiswa_id" value="{{ $idM }}" hidden
+            <input type="text" id="mahasiswa_id" name="mahasiswa_id" value="{{ auth('mahasiswa')->user()->id  }}" hidden
                 class="w-full bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg py-2 px-3"
                 readonly>
             <input type="text" id="matkul_id" name="matkul_id" value="{{ $matkul_id->kode_mata_kuliah }}" hidden
                 class="w-full bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg py-2 px-3"
                 readonly>
-                
+
             <div class="mb-4">
                 <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-400">Nama Mata
                     Kuliah</label>
@@ -76,7 +76,7 @@
             </div>
             <div class="mb-4">
                 <label for="kuota" class="block text-sm font-medium text-gray-700 dark:text-gray-400">Kuota</label>
-                <input type="text" id="kuota" name="kuota" value="{{ $matkul->kuota }} Orang"
+                <input type="text" id="kuota" name="kuota" value="{{$count}} Orang "
                     class="w-full bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg py-2 px-3"
                     readonly>
             </div>
@@ -111,6 +111,9 @@
                             <th
                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
                                 Bidang Jurusan</th>
+                            <th
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                Status Permintaan</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-300 dark:bg-gray-700 dark:divide-gray-600">
@@ -122,11 +125,25 @@
                         @endif
                         @foreach ($mahasiswa as $key)
                             <tr>
-                                <td class="px-6 py-4 whitespace-nowrap"> {{ $key->name}}</td>
-                                <td class="px-6 py-4 whitespace-nowrap"> {{ $key->gender}}</td>
-                                <td class="px-6 py-4 whitespace-nowrap"> {{ $key->phone}}</td>
-                                <td class="px-6 py-4 whitespace-nowrap"> {{ $key->jurusan['jurusan']}}</td>
-                            </tr>
+                                <td class="px-6 py-4 whitespace-nowrap"> {{ $key->mahasiswa->name }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap"> {{ $key->mahasiswa->gender }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap"> {{ $key->mahasiswa->phone }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap"> {{ $key->mahasiswa->jurusan['jurusan'] }}</td>
+                             
+                                    @if ($key->status == 'pending')
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="text-yellow-500">Menunggu Persetujuan</span>
+                                        </td>
+                                    @elseif ($key->status == 'success')
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="text-green-500">Telah disetujui</span>
+                                        </td>
+                                    @else
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="text-red-500">Tidak disetujui</span>
+                                        </td>
+                                    @endif
+                            </tr>                         
                         @endforeach
 
                     </tbody>
@@ -136,11 +153,30 @@
 
             <a href="/admin/mata-kuliah"
                 class="px-5 py-3 text-xs font-medium text-center text-white bg-gray-700 rounded-lg hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Kembali</a>
-            @if (auth('mahasiswa')->user()->role == 'mahasiswa' || auth()->user()->role == 'admin' )
-                <button type="submit"
-                    class="px-5 py-3 text-xs font-medium text-center text-white bg-purple-700 rounded-lg hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800">Gabung
-                    Mata Kuliah
-                </button>
+            @if (auth('mahasiswa')->user()->role == 'mahasiswa' || user()->role == 'admin')
+                @if (auth('mahasiswa')->user()->jurusan['jurusan'] == $matkul->jurusan)
+                    @if (in_array('success', $status->toArray()))
+                        <button type="button"
+                            class="px-5 py-3 text-xs font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Telah
+                            Disetujui
+                        </button>
+                    @elseif (in_array('pending', $status->toArray()))
+                        <button type="button"
+                            class="px-5 py-3 text-xs font-medium text-center text-white bg-yellow-700 rounded-lg hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800">Menunggu
+                            Persetujuan
+                        </button>
+                    @elseif (in_array('failed', $status->toArray()))
+                        <button type="button"
+                            class="px-5 py-3 text-xs font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Permintaan Ditolak
+                        </button>
+                    @else
+                        <button type="submit"
+                            class="px-5 py-3 text-xs font-medium text-center text-white bg-purple-700 rounded-lg hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800">Gabung
+                            Mata Kuliah
+                        </button>
+                    @endif
+                @endif
+
             @endif
         </form>
     </div>

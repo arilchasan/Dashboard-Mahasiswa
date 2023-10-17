@@ -43,6 +43,6 @@ class Mahasiswa extends Model implements Authenticatable
 
     public function orders()
     {
-        return $this->hasMany(Order::class);
+        return $this->hasMany(Order::class , 'mahasiswa_id', 'id');
     }
 }

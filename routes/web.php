@@ -36,6 +36,7 @@ Route::prefix('/admin')->group(function () {
         Route::get('/create',[MahasiswaController::class, 'create']);
         Route::post('/add',[MahasiswaController::class, 'store']);
         Route::delete('/delete/{id}',[MahasiswaController::class, 'destroy']);
+        Route::get('/matkul-saya',[MahasiswaController::class, 'matkulSaya']);
     });
     Route::get('/dosen', [DosenController::class, 'index']);
     Route::get('/mata-kuliah',[MataKuliahController::class, 'index']);

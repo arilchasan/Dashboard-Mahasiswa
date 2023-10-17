@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('mahasiswa_id');
             $table->foreign('mahasiswa_id')->references('id')->on('mahasiswa')->onDelete('cascade');
-            // $table->integer('matkul_id');
+            $table->integer('matkul_id');
             $table->enum('status', ['pending', 'success', 'failed']);
             $table->timestamps();
         });
